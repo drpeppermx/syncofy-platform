@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "WebSearch",
+      "Bash(find /c/Users/shamu/projects/jason-new -maxdepth 2 -type f -name \"*.json\" -o -name \"*.md\" -o -name \"*.yml\" -o -name \"*.yaml\" -o -name \"*.ts\" -o -name \"*.js\" -o -name \"*.jsx\" 2>/dev/null | head -20)",
+      "Bash(file /c/Users/shamu/projects/jason-new/*.jsx /c/Users/shamu/projects/jason-new/*.html 2>/dev/null)",
+      "Bash(node --version && npm --version)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(curl -s http://localhost:5173/ | head -20)",
+      "Bash(pkill -f \"vite\" 2>/dev/null; echo \"stopped\")",
+      "Bash(gh auth:*)",
+      "Bash(which vercel:*)",
+      "Bash(git init:*)"
+    ]
+  }
+}

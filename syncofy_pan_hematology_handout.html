@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syncofy · Pan-Hematology 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Instrument+Serif:ital@0;1&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff;
+    color: #0A0E1A;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── PAGE SETUP ── */
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 0.55in 0.6in;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.3in 0.35in;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background texture */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 90% 10%, rgba(99,102,241,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 10% 90%, rgba(0,194,168,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 0.25in;
+    border-bottom: 2px solid #0A0E1A;
+    margin-bottom: 0.05in;
+  }
+
+  .header-left {}
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #6366F1, #00C2A8);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 19px; color: #fff;
+    flex-shrink: 0;
+  }
+
+  .logo-name {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: #0A0E1A;
+  }
+
+  .event-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0A0E1A;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .event-badge .dot {
+    width: 5px; height: 5px;
+    background: #00C2A8;
+    border-radius: 50%;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .headline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.5;
+    font-style: italic;
+    max-width: 220px;
+    margin-left: auto;
+  }
+
+  /* ── LEFT COLUMN ── */
+  .col-left {}
+
+  /* Stats grid */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .stat {
+    background: #0A0E1A;
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #fff;
+  }
+
+  .stat-value {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #6366F1, #00C2A8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Capability comparison */
+  .comparison {
+    margin-bottom: 22px;
+  }
+
+  .section-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6366F1;
+    margin-bottom: 10px;
+  }
+
+  .compare-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #F1F5F9;
+  }
+
+  .compare-row:last-child { border-bottom: none; }
+
+  .compare-cap {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0A0E1A;
+    width: 110px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .compare-legacy {
+    font-size: 10px;
+    color: #EF4444;
+    flex: 1;
+    line-height: 1.4;
+  }
+
+  .compare-syncofy {
+    font-size: 10px;
+    color: #059669;
+    flex: 1;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .compare-header {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #0A0E1A;
+    margin-bottom: 2px;
+  }
+
+  .compare-h {
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Pricing */
+  .pricing {
+    margin-bottom: 0;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid #F1F5F9;
+  }
+
+  .price-row:last-child { border-bottom: none; }
+
+  .price-name { font-size: 11px; font-weight: 600; color: #0A0E1A; }
+  .price-tag {
+    font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .price-val { font-size: 12px; font-weight: 900; color: #0A0E1A; letter-spacing: -0.5px; }
+  .price-unit { font-size: 9px; color: #94A3B8; }
+
+  /* ── RIGHT COLUMN ── */
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* QR code section */
+  .qr-section {
+    background: #0A0E1A;
+    border-radius: 18px;
+    padding: 24px;
+    text-align: center;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .qr-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #00C2A8;
+    margin-bottom: 14px;
+  }
+
+  .qr-placeholder {
+    width: 160px;
+    height: 160px;
+    background: #fff;
+    border-radius: 12px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* QR code pattern - generated via CSS */
+  .qr-inner {
+    width: 140px;
+    height: 140px;
+    position: relative;
+  }
+
+  .qr-corner {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border: 4px solid #0A0E1A;
+    border-radius: 4px;
+  }
+
+  .qr-corner::after {
+    content: '';
+    position: absolute;
+    top: 5px; left: 5px;
+    width: 14px; height: 14px;
+    background: #0A0E1A;
+    border-radius: 2px;
+  }
+
+  .qr-corner.tl { top: 0; left: 0; }
+  .qr-corner.tr { top: 0; right: 0; }
+  .qr-corner.bl { bottom: 0; left: 0; }
+
+  .qr-dots {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(circle, #0A0E1A 1.5px, transparent 1.5px);
+    background-size: 8px 8px;
+    background-position: 40px 8px;
+    mask-image: radial-gradient(ellipse at center, black 50%, transparent 70%);
+  }
+
+  .qr-url {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+
+  .qr-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* Live demo strip */
+  .demo-strip {
+    background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(0,194,168,0.06));
+    border: 1.5px solid rgba(99,102,241,0.2);
+    border-radius: 14px;
+    padding: 16px 18px;
+  }
+
+  .demo-strip-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    color: #6366F1; margin-bottom: 10px;
+  }
+
+  .demo-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 9px;
+  }
+
+  .demo-item:last-child { margin-bottom: 0; }
+
+  .demo-icon {
+    width: 22px; height: 22px;
+    background: #0A0E1A;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .demo-text { font-size: 11px; color: #0A0E1A; line-height: 1.5; }
+  .demo-text strong { font-weight: 700; }
+
+  /* Compliance badges */
+  .compliance {
+    display: flex; gap: 7px; flex-wrap: wrap;
+  }
+
+  .badge {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 4px 9px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Bio */
+  .bio {
+    background: #F8FAFC;
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid #E2E8F0;
+  }
+
+  .bio-name { font-size: 13px; font-weight: 800; color: #0A0E1A; margin-bottom: 2px; }
+  .bio-title { font-size: 10px; color: #6366F1; font-weight: 600; margin-bottom: 6px; }
+  .bio-text { font-size: 10px; color: #64748B; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .footer {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.18in;
+    border-top: 1px solid #E2E8F0;
+    margin-top: 0.05in;
+  }
+
+  .footer-left { font-size: 9px; color: #94A3B8; line-height: 1.6; }
+  .footer-contact { font-size: 11px; font-weight: 700; color: #0A0E1A; }
+  .footer-right { text-align: right; }
+  .footer-tagline { font-family: 'Instrument Serif', Georgia, serif; font-size: 12px; font-style: italic; color: #475569; }
+
+  /* ── PRINT ── */
+  @media print {
+    body { margin: 0; }
+    .page { page-break-after: always; }
+  }
+
+  @page {
+    size: letter;
+    margin: 0;
+  }
+</style>
+<!-- QR code library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-row">
+        <div class="logo-icon">s</div>
+        <div class="logo-name">Syncofy</div>
+      </div>
+      <div class="event-badge">
+        <div class="dot"></div>
+        Pan-Hematology 2026 · San Francisco · March 28–30
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="headline">Engagement intelligence<br/>for Medical Affairs teams<br/>that move faster.</div>
+    </div>
+  </div>
+
+  <!-- LEFT COLUMN -->
+  <div class="col-left">
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">8,953+</div>
+        <div class="stat-label">H/O Providers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">65–88%</div>
+        <div class="stat-label">Cost Reduction</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">1–2 wks</div>
+        <div class="stat-label">Advisory Timeline</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">87%</div>
+        <div class="stat-label">FFPS Accuracy</div>
+      </div>
+    </div>
+
+    <!-- Comparison -->
+    <div class="comparison">
+      <div class="section-label">Why Syncofy</div>
+      <div class="compare-header">
+        <div class="compare-h" style="width:110px;flex-shrink:0;">Capability</div>
+        <div class="compare-h" style="flex:1;color:#EF4444;">Legacy Platforms</div>
+        <div class="compare-h" style="flex:1;color:#059669;">Syncofy</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cap">KOL ID</div>
+        <div class="compare-legacy">Static annual databases</div>
+        <div class="compare-syncofy">8,953 live profiles, FFPS AI scoring</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cap">Advisory Boards</div>
+        <div class="compare-legacy">6–8 weeks, $75K–$150K</div>
+        <div class="compare-syncofy">1–2 weeks, $15,500 all-in</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cap">FMV</div>
+        <div class="compare-legacy">Spreadsheet estimates</div>
+        <div class="compare-syncofy">Real-time Sullivan Cotter benchmarks</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cap">Sunshine Act</div>
+        <div class="compare-legacy">Post-event manual reconciliation</div>
+        <div class="compare-syncofy">Automated at point of engagement</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cap">Emerging KOLs</div>
+        <div class="compare-legacy">Reactive, no prediction</div>
+        <div class="compare-syncofy">FFPS algorithm, 87% accuracy</div>
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="pricing">
+      <div class="section-label">Pricing</div>
+      <div class="price-row">
+        <div>
+          <div class="price-name">KOL X Premium</div>
+        </div>
+        <div style="text-align:right">
+          <div class="price-val">$12,000</div>
+          <div class="price-unit">/year</div>
+        </div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Syncofy SIGNAL</div></div>
+        <div style="text-align:right"><div class="price-val">$25,000</div><div class="price-unit">/year</div></div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Advisory Board</div></div>
+        <div style="text-align:right"><div class="price-val">$15,500</div><div class="price-unit">/event</div></div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Advisory Program</div></div>
+        <div style="text-align:right"><div class="price-val">$42,000</div><div class="price-unit">/3 events</div></div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name">Syncofy Intelligence</div></div>
+        <div style="text-align:right"><div class="price-val">$75,000</div><div class="price-unit">/year</div></div>
+      </div>
+      <div class="price-row">
+        <div><div class="price-name" style="color:#6366F1;">Enterprise Suite</div></div>
+        <div style="text-align:right"><div class="price-val" style="color:#6366F1;">$120,000</div><div class="price-unit">/year</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="col-right">
+
+    <!-- QR -->
+    <div class="qr-section">
+      <div class="qr-label">⚡ Scan for Live KOL X Demo</div>
+      <div id="qrcode" style="width:180px;height:180px;margin:0 auto 14px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;"></div>
+      <div class="qr-url">kolx.syncofy.ai</div>
+      <div class="qr-sub">8,953 providers · Search your name · Get Started</div>
+    </div>
+
+    <!-- Live demo bullets -->
+    <div class="demo-strip">
+      <div class="demo-strip-label">What You'll See Live</div>
+      <div class="demo-item">
+        <div class="demo-icon">🔍</div>
+        <div class="demo-text"><strong>Search any KOL by name</strong> — real NPI-verified profiles, publications, active trials, Syncofy Engagement Score</div>
+      </div>
+      <div class="demo-item">
+        <div class="demo-icon">⚡</div>
+        <div class="demo-text"><strong>FFPS Prediction</strong> — see who Syncofy has flagged as the next Tier 1 KOL in your disease area before competitors engage</div>
+      </div>
+      <div class="demo-item">
+        <div class="demo-icon">🤖</div>
+        <div class="demo-text"><strong>AI Chat</strong> — ask "Top AML KOLs at MD Anderson" or "DLBCL advisory board slate" and get a live answer with real data</div>
+      </div>
+      <div class="demo-item">
+        <div class="demo-icon">📋</div>
+        <div class="demo-text"><strong>Get Started in 4 steps</strong> — profile capture, services, agreements, and Stripe payment all in one flow</div>
+      </div>
+    </div>
+
+    <!-- Compliance -->
+    <div>
+      <div class="section-label" style="margin-bottom:8px;">Compliance Frameworks</div>
+      <div class="compliance">
+        <div class="badge">PhRMA Code</div>
+        <div class="badge">Anti-Kickback</div>
+        <div class="badge">Sunshine Act</div>
+        <div class="badge">CCPA / GDPR</div>
+        <div class="badge">21 CFR Pt 11</div>
+        <div class="badge">NPI Verified</div>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="bio">
+      <div class="bio-name">Jason Yonehiro</div>
+      <div class="bio-title">Founder & CEO, Syncofy</div>
+      <div class="bio-text">20+ years pharmaceutical industry. ADC Therapeutics · GSK · AstraZeneca · Amgen · Celgene · Boehringer Ingelheim. Co-inventor US Patent 11,938,193 (chemerin immunotherapy). Built Syncofy to solve the engagement execution problem that legacy platforms never could.</div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      Syncofy, LLC · San Francisco, CA<br/>
+      <span class="footer-contact">info@syncofy.ai</span>
+    </div>
+    <div class="footer-right">
+      <div class="footer-tagline">"Larvol tells you who the KOLs are.<br/>Syncofy gets them in the room."</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Generate actual QR code
+  if (typeof QRCode !== 'undefined') {
+    new QRCode(document.getElementById("qrcode"), {
+      text: "https://kolx.syncofy.ai",
+      width: 160,
+      height: 160,
+      colorDark: "#0A0E1A",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  }
+</script>
+</body>
+</html>
